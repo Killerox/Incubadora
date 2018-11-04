@@ -145,7 +145,7 @@ gtag('config', 'UA-100554272-8');
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
           <br><br><br>
-					<h1 align="center"><font size="6">Estado del proyecto</font></h1>
+					<h1 align="center"><font size="6">Estado del proyecto </font></h1>
 					<br><br>
 					<div class="progress" style="height: 60px;">
 	          <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"><font size="6">75%</font></div>

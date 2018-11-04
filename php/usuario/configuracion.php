@@ -16,18 +16,26 @@ $folio = $_SESSION['folio'];
 
 $sql = "SELECT folio, Pnombre, nombre, sector1, sector2 FROM registroproyecto WHERE folio = '$folio'";
 $result = $mysqli->query($sql);
-
 $row = $result->fetch_assoc();
 
+$sqli = "SELECT activo FROM registroproyecto WHERE folio = '$folio'";
+$resulti = $mysqli->query($sqli);
+$rowi = $resulti->fetch_assoc();
+
+if($rowi['activo']==0){
+	$estado = "Inactivo";
+}else{
+	$estado = "Activo";
+}
+
 if (!empty($_POST)) {
-	$user = $mysqli->real_escape_string($_POST['Iuser']);
 	$pas1 = $mysqli->real_escape_string($_POST['Ipass']);
 	$pas2 = $mysqli->real_escape_string($_POST['Ipass2']);
 	if ($pas1 == $pas2) {
 
 		$pas = hashPassword($pas1);
 
-		$stmt = "UPDATE users SET user='$user', password='$pas' WHERE folio='$folio'";
+		$stmt = "UPDATE users SET password='$pas' WHERE folio='$folio'";
     $resultado = $mysqli->query($stmt);
 
 		#$resultado = mysqli_query($mysqli, $stmt);
@@ -144,21 +152,19 @@ gtag('config', 'UA-100554272-8');
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="usuario.php">Estado del proyecto
-              </a>
-            </li>
 						<li class="nav-item">
-              <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios</a>
+              <a class="nav-link" href="usuario.php">Estado del proyecto  <i class="fas fa-project-diagram fa-lg"></i></a>
+            </li>
+						<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+						<span class="fa-layers-counter">5</span></a>
+						<li class="nav-item">
+              <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="configuracion.php">Configuracion</a>
+              <a class="nav-link" href="configuracion.php">Configuración  <i class="fas fa-cogs fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="estado.php">Estado de cuenta</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../logout.php">Cerrar sesion</a>
+              <a class="nav-link" href="../logout.php">Cerrar sesión  <i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
         </div>
@@ -183,6 +189,21 @@ gtag('config', 'UA-100554272-8');
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
 
+					<div class="">
+						<br><br><br>
+						<h1 align="center"><font size="6">Estado del proyecto</font></h1>
+						<div class="">
+							<div id="signupbox" style="margin-top:50px" class="col-sm-11 col-sm-offset-3">
+								<div class="panel panel-info">
+
+									<div class="p-3 mb-2 bg-success text-white">
+										<div class="panel-title"><h1 align="center"> <?php echo $estado ?> </h1></div>
+									</div>
+								</div>
+							 </div>
+							</div>
+	        </div>
+
 					<br> <br>
 					<h1 align="center"><font size="6">Actualiza tu información</font></h1>
 					<div class="">
@@ -190,7 +211,7 @@ gtag('config', 'UA-100554272-8');
 							<div class="panel panel-info">
 
 								<div class="p-3 mb-2 bg-secondary text-white">
-									<div class="panel-title"><h1 align="center">Cambiar contraseña y usuario</h1></div>
+									<div class="panel-title"><h1 align="center">Cambiar contraseña</h1></div>
 								</div>
 
 								<div class="panel-body" >
@@ -202,14 +223,6 @@ gtag('config', 'UA-100554272-8');
 											<p>Error:</p>
 											<span></span>
 										</div>
-
-										<div class="form-group">
-											<label for="nombre" class="col-md-8 control-label">Usuario:</label>
-											<div class="col-md-12">
-												<input type="text" class="form-control" id="Iuser" name="Iuser" placeholder="Usuario" value="" required >
-											</div>
-										</div>
-
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-3 control-label">Contraseña:</label>

@@ -617,10 +617,14 @@ gtag('config', 'UA-100554272-8');
           <br>
 					<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
 						<div class="panel-title col-md-9">1.- Descripción de la empresa
-							<input onclick="clickaction(this)" id="boton1" type="submit" value="Mostrar" class="btn btn-success" align="right"><i class="icon-hand-right"></i>
+
 						</div>
 					</div>
-
+          <div class="col-3">
+						<div class="panel">
+								<input onclick="clickaction(this)" id="boton1" type="submit" value="Mostrar" class="btn btn-success" align="right">
+						</div>
+          </div>
 					<div class="table-responsive">
 						<br>
 							<table id="tabla1" class="table table-bordered table-hover table-condensed" align="center">

@@ -19,45 +19,6 @@ if (!empty($_POST)) {
 
 }
 
-function login($usuario, $password)
-{
-	global $mysqli;
-
-	$stmt = $mysqli->prepare("SELECT id_user, folio, tipo, password FROM users WHERE user = ? LIMIT 1");
-	$stmt->bind_param("s", $usuario);
-	$stmt->execute();
-	$stmt->store_result();
-	$rows = $stmt->num_rows;
-
-	if($rows > 0) {
-
-			$stmt->bind_result($id, $folio, $id_tipo, $passwd);
-			$stmt->fetch();
-			#$prueba='1234';
-			#$validaPassw = password_verify($password, $passwd);
-
-			if(password_verify($password, $passwd)){
-				$_SESSION['id_user'] = $id;
-				$_SESSION['folio'] = $folio;
-				$_SESSION['tipo'] = $id_tipo;
-
-				if($id_tipo == 1){
-										 header("location: php/administrador/administrador.php");
-				}
-				else{
-					header("location: php/usuario/usuario.php");
-				}
-
-				} else {
-
-				$errors[] = "La contrase&ntilde;a es incorrecta";}
-		} else {
-		$errors[] = "El nombre de usuario no existe";
-	}
-	return $errors;
-}
-
-
 ?>
 <html>
 
@@ -174,16 +135,17 @@ gtag('config', 'UA-100554272-8');
 
         							<div style="margin-bottom: 25px" class="input-group">
         								<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-        								<input id="password" type="password" class="form-control" name="password" placeholder="Password" value="<?php if(isset($password)) echo $password; ?>" required>
+        								<input id="password" type="password" class="form-control" name="password" placeholder="Contraseña" value="<?php if(isset($password)) echo $password; ?>" required>
         							</div>
 
         							<div style="margin-top:10px" class="form-group">
         								<div class="col-sm-12 controls">
-        									<button id="btn-login" type="submit" class="btn btn-success">Iniciar Sesi&oacute;n</a>
+        									<button id="btn-login" type="submit" class="btn btn-success">Entrar</button>
+													<a href="#">¿Olvidaste tu cuenta?</a>
         								</div>
         							</div>
 
-        							<p>¿Quieres registrar un proyecto?</p><a href="php/registro.php">Click aquí</a>
+        							<p>¿Quieres registrar un proyecto?</p><a href="php/registro.php">Click aquí</a><br>
 
         							<div class="form-group">
         								<div class="col-md-12 control">

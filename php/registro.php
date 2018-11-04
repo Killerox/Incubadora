@@ -184,7 +184,7 @@ Estilo SEP HIDALGO -->
 			</div>
 		</div>
   </header>
-	  <br> <br>
+	  <br> <br> 
     <?php echo resultBlock($errors); ?>
 		<br> <br>
 		<h1 align="center">Registrar proyecto</h1>
@@ -247,42 +247,44 @@ Estilo SEP HIDALGO -->
 								</div>
 							</div>
 
-							<div class="col-md-9">
+							<div class="form-group">
 								<label for="apellidos" class="col-md-3 control-label">Estado:</label>
+                <div class="col-md-9">
 								<select  class="form-control" name="estado" id="estado">
                 <option value="Aguascalientes">Aguascalientes</option>
                 <option value="Baja California">Baja California</option>
                 <option value="Baja California Sur">Baja California Sur</option>
                 <option value="Campeche">Campeche</option>
                 <option value="Chiapas">Chiapas</option>
-        <option value="Chihuahua">Chihuahua</option>
-        <option value="Coahuila">Coahuila</option>
-        <option value="Colima">Colima</option>
-        <option value="Ciudad de México">Ciudad de México</option>
-        <option value="Durango">Durango</option>
-        <option value="Guanajuato">Guanajuato</option>
-        <option value="Guerrero">Guerrero</option>
-        <option value="Hidalgo">Hidalgo</option>
-        <option value="Jalisco">Jalisco</option>
-        <option value="México">México</option>
-        <option value="Michoacán">Michoacán</option>
-        <option value="Morelos">Morelos</option>
-        <option value="Nayarit">Nayarit</option>
-        <option value="Nuevo León">Nuevo León</option>
-        <option value="Oaxaca">Oaxaca</option>
-        <option value="Puebla">Puebla</option>
-        <option value="Querétaro">Querétaro</option>
-        <option value="Quintana Roo">Quintana Roo</option>
-        <option value="San Luis Potosí">San Luis Potosí</option>
-        <option value="Sinaloa">Sinaloa</option>
-        <option value="Sonora">Sonora</option>
-        <option value="Tabasco">Tabasco</option>
-        <option value="Tamaulipas">Tamaulipas</option>
-        <option value="Tlaxcala">Tlaxcala</option>
-        <option value="Veracruz">Veracruz</option>
-        <option value="Yucatán">Yucatán</option>
-        <option value="Zacatecas">Zacatecas</option>
-    </select>
+                <option value="Chihuahua">Chihuahua</option>
+                <option value="Coahuila">Coahuila</option>
+                <option value="Colima">Colima</option>
+                <option value="Ciudad de México">Ciudad de México</option>
+                <option value="Durango">Durango</option>
+                <option value="Guanajuato">Guanajuato</option>
+                <option value="Guerrero">Guerrero</option>
+                <option value="Hidalgo">Hidalgo</option>
+                <option value="Jalisco">Jalisco</option>
+                <option value="México">México</option>
+                <option value="Michoacán">Michoacán</option>
+                <option value="Morelos">Morelos</option>
+                <option value="Nayarit">Nayarit</option>
+                <option value="Nuevo León">Nuevo León</option>
+                <option value="Oaxaca">Oaxaca</option>
+                <option value="Puebla">Puebla</option>
+                <option value="Querétaro">Querétaro</option>
+                <option value="Quintana Roo">Quintana Roo</option>
+                <option value="San Luis Potosí">San Luis Potosí</option>
+                <option value="Sinaloa">Sinaloa</option>
+                <option value="Sonora">Sonora</option>
+                <option value="Tabasco">Tabasco</option>
+                <option value="Tamaulipas">Tamaulipas</option>
+                <option value="Tlaxcala">Tlaxcala</option>
+                <option value="Veracruz">Veracruz</option>
+                <option value="Yucatán">Yucatán</option>
+               <option value="Zacatecas">Zacatecas</option>
+             </select>
+           </div>
 							</div>
 
 							<div class="form-group">
@@ -325,7 +327,7 @@ Estilo SEP HIDALGO -->
             </div>
               <br><br><br><br>
 							<div class="form-group">
-								<label for="apellidos" class="col-md-9 control-label">Su proyecto está constituido legalmente como empresa</label>
+								<label for="apellidos" class="col-md-9 control-label">¿Su proyecto está constituido legalmente como empresa?</label>
 							</div>
 
 							<div class="form-check form-check-inline">
@@ -436,7 +438,7 @@ Estilo SEP HIDALGO -->
 
 					<br><br><br><br>
 					<div class="form-group">
-						<label for="apellidos" class="col-md-9 control-label">Por qué medio por el que se enteró del UPINNEM</label>
+						<label for="apellidos" class="col-md-9 control-label">¿Por qué medio por el que se enteró del UPINNEM?</label>
 					</div>
 
 					<div class="form-check form-check-inline">

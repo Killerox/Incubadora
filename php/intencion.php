@@ -9,7 +9,7 @@ require 'funcs.php';
 
 
  if($_FILES["intencion"]["error"]>0){
-  echo "Error al cargar archivo";
+  echo "No selecciono su Carta Intención";
   } else {
 
   $permitidos = array("application/pdf");

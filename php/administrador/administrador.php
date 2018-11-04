@@ -77,6 +77,7 @@ $resbdproyecto = $mysqli->query($bdproyecto);
     <link href="../../css/shop-homepage.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
+
   </head>
 
   <body>
@@ -110,12 +111,11 @@ $resbdproyecto = $mysqli->query($bdproyecto);
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Solicitudes
-                <span class="sr-only">(current)</span>
-              </a>
+               <a class="nav-link" href="#">Solicitudes   <i class="fab fa-wpforms fa-lg"></i>
+							 <span class="fa-layers-counter">1,419</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="usuarios.php">Usuarios</a>
+              <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Proyectos activos</a>

@@ -75,46 +75,45 @@
 				</script>';
 				header("location: administrador.php");
 			}
+}
 
+function login($usuario, $password)
+{
+	global $mysqli;
 
-		function login($usuario, $password)
-		{
-			global $mysqli;
+	$stmt = $mysqli->prepare("SELECT id_user, folio, tipo, password FROM users WHERE user = ? LIMIT 1");
+	$stmt->bind_param("s", $usuario);
+	$stmt->execute();
+	$stmt->store_result();
+	$rows = $stmt->num_rows;
 
-			$stmt = $mysqli->prepare("SELECT id_user, folio, tipo, password FROM users WHERE user = ? LIMIT 1");
-			$stmt->bind_param("s", $usuario);
-			$stmt->execute();
-			$stmt->store_result();
-			$rows = $stmt->num_rows;
+	if($rows > 0) {
 
-			if($rows > 0) {
+			$stmt->bind_result($id, $folio, $id_tipo, $passwd);
+			$stmt->fetch();
+			#$prueba='1234';
+			#$validaPassw = password_verify($password, $passwd);
 
-					$stmt->bind_result($id, $folio, $id_tipo, $passwd);
-					$stmt->fetch();
-					#$prueba='1234';
-					#$validaPassw = password_verify($password, $passwd);
+			if(password_verify($password, $passwd)){
+				$_SESSION['id_user'] = $id;
+				$_SESSION['folio'] = $folio;
+				$_SESSION['tipo'] = $id_tipo;
 
-					if(password_verify($password, $passwd)){
-	          $_SESSION['id_user'] = $id;
-						$_SESSION['folio'] = $folio;
-						$_SESSION['tipo'] = $id_tipo;
+				if($id_tipo == 1){
+										 header("location: php/administrador/administrador.php");
+				}
+				else{
+					header("location: php/usuario/usuario.php");
+				}
 
-						if($id_tipo == 1){
-	                       header("location: php/administrador/administrador.php");
-						}
-						else{
-							header("location: php/usuario/usuario.php");
-						}
-
-						} else {
-
-						$errors = "La contrase&ntilde;a es incorrecta";}
 				} else {
-				$errors = "El nombre de usuario no existe";
-			}
-			return $errors;
-		}
+
+				$errors[] = "La contrase&ntilde;a es incorrecta";}
+		} else {
+		$errors[] = "El nombre de usuario no existe";
 	}
+	return $errors;
+}
 
 	function resultBlock($errors){
 		if(count($errors) > 0)
@@ -124,7 +123,7 @@
 			<ul>";
 			foreach($errors as $error)
 			{
-				echo "<li>".$error."</li>";
+				echo "<li>". print json_encode($error) ."</li>";
 			}
 			echo "</ul>";
 			echo "</div>";

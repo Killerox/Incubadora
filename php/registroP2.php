@@ -9,7 +9,6 @@ $errors = array();
 
 if(!empty($_POST)){
 
-
 	$Inombre = $mysqli->real_escape_string($_POST['Inombre']);
 	$Idireccion = $mysqli->real_escape_string($_POST['Idireccion']);
   $Icolonia = $mysqli->real_escape_string($_POST['Icolonia']);
@@ -25,9 +24,9 @@ if(!empty($_POST)){
 
   if($registro > 0){
 
-  $errors[] = "Usuario registrado exitosamente";
   $mysqli->commit();
   header("location: registroP2.php?id=".$folio."");
+	$errors[] = "Usuario registrado exitosamente";
 
 }else {
   $errors[] = "Error al registrar";
@@ -106,8 +105,9 @@ gtag('config', 'UA-100554272-8');
 			</div>
 		</div>
   </header>
-    <?php echo resultBlock($errors); ?>
-	  <br> <br>	<br>
+   	<br> <br> <br> <br>
+	  <?php echo resultBlock($errors); ?>
+	  <br> <br>
 		<h1 align="center">Registrar proyecto</h1>
 		<div class="container col-md-7">
 			<div id="signupbox" style="margin-top:50px" class="col-sm-10 col-sm-offset-2">

@@ -109,21 +109,18 @@ gtag('config', 'UA-100554272-8');
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Estado del proyecto
-                <span class="sr-only">(current)</span>
-              </a>
+              <a class="nav-link" href="#">Estado del proyecto  <i class="fas fa-project-diagram fa-lg"></i></a>
             </li>
+						<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+						<span class="fa-layers-counter">5</span></a>
 						<li class="nav-item">
-              <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios</a>
+              <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="configuracion.php">Configuracion</a>
+              <a class="nav-link" href="configuracion.php">Configuración  <i class="fas fa-cogs fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="estado.php">Estado de cuenta</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../logout.php">Cerrar sesion</a>
+              <a class="nav-link" href="../logout.php">Cerrar sesión  <i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
         </div>

@@ -81,7 +81,7 @@ function login($usuario, $password)
 {
 	global $mysqli;
 
-	$stmt = $mysqli->prepare("SELECT id_user, folio, tipo, password FROM users WHERE user = ? LIMIT 1");
+	$stmt = $mysqli->prepare("SELECT id_user, folio, tipo, password, estado FROM users WHERE user = ? LIMIT 1");
 	$stmt->bind_param("s", $usuario);
 	$stmt->execute();
 	$stmt->store_result();
@@ -89,29 +89,28 @@ function login($usuario, $password)
 
 	if($rows > 0) {
 
-			$stmt->bind_result($id, $folio, $id_tipo, $passwd);
+			$stmt->bind_result($id, $folio, $id_tipo, $passwd, $estado);
 			$stmt->fetch();
 			#$prueba='1234';
 			#$validaPassw = password_verify($password, $passwd);
-
-			if(password_verify($password, $passwd)){
+      if($estado == 0){
+				$errors[] = "Tu cuenta esta temporalmente desactivada";
+			} else{
+			  if(password_verify($password, $passwd)){
 				$_SESSION['id_user'] = $id;
 				$_SESSION['folio'] = $folio;
 				$_SESSION['tipo'] = $id_tipo;
-
-				if($id_tipo == 1){
-										 header("location: php/administrador/administrador.php");
-				}
-				else{
-					header("location: php/usuario/usuario.php");
-				}
-
-				} else {
-
-				$errors[] = "La contrase&ntilde;a es incorrecta";}
+           //Usuario Administrador
+				   if($id_tipo == 1){ header("location: php/administrador/administrador.php"); }
+				   else{ header("location: php/usuario/usuario.php");}
+				// Contraseña
+			}else {$errors[] = "La contrase&ntilde;a es incorrecta";} }
 		} else {
 		$errors[] = "El nombre de usuario no existe";
 	}
+
+
+
 	return $errors;
 }
 

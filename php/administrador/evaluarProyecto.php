@@ -104,30 +104,34 @@ $rowi = $resulti->fetch_assoc();
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#"><?php echo 'Bienvenid@ '.utf8_decode($row['user']); ?></a>
+        <a class="navbar-brand" href="#"><?php echo ''.utf8_decode($row['user']); ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="administrador.php">Solicitudes
-              </a>
+						<li class="nav-item active">
+               <a class="nav-link" href="administrador.php">Solicitudes   <i class="fab fa-wpforms fa-lg"></i>
+							 <span class="fa-layers-counter">1,419</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="usuarios.php">Usuarios</a>
+              <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Proyectos activos</a>
+              <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
             </li>
 						<li class="nav-item">
-              <a class="nav-link" href="#">Cortes</a>
+							<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+							<span class="fa-layers-counter">5</span></a>
+						</li>
+						<li class="nav-item">
+              <a class="nav-link" href="#">Cortes <i class="fas fa-database fa-lg"></i></a>
             </li>
 						<li class="nav-item">
-              <a class="nav-link" href="#">Platicas</a>
+              <a class="nav-link" href="#">Platicas <i class="fas fa-mouse-pointer fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">Cerrar sesión</a>
+              <a class="nav-link" href="../logout.php">Cerrar sesión <i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
         </div>
@@ -191,7 +195,7 @@ $rowi = $resulti->fetch_assoc();
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 				<?php
-        echo "<a href='email_sender.php?id=".$folioEvaluar."'><button type='button' class='btn btn-primary'>Aceptar</button></a>";
+        echo "<a href='confirmar_email.php?id=".$folioEvaluar."'><button type='button' class='btn btn-primary'>Aceptar</button></a>";
 				?>
       </div>
     </div>
@@ -212,7 +216,9 @@ $rowi = $resulti->fetch_assoc();
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Aceptar</button>
+				<?php
+        echo "<a href='rechazar_email.php?id=".$folioEvaluar."'><button type='button' class='btn btn-primary'>Aceptar</button></a>";
+				?>
       </div>
     </div>
   </div>

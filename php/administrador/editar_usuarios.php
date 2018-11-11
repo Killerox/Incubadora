@@ -12,6 +12,24 @@ if($_SESSION['tipo']==0){
     header("Location: ../logout.php");
 }
 
+$usuarioEditar = $_GET['id'];
+
+if (!empty($_POST)) {
+
+  $estado = $mysqli->real_escape_string($_POST['estado']);
+
+	$stmt = "UPDATE users SET estado = '$estado'  WHERE id_user='$usuarioEditar'" ;
+	$resultado = mysqli_query($mysqli, $stmt);
+	if($resultado > 0){
+		$mysqli->commit();
+		header("location: usuarios.php");
+	}
+	else{
+		$mysqli->rollback();
+		header("location: usuarios.php");
+	}
+}
+
 
 //Informacion del usuario activo
 $folio = $_SESSION['folio'];
@@ -19,8 +37,9 @@ $sql = "SELECT id_user, user FROM users WHERE folio = '$folio'";
 $result = $mysqli->query($sql);
 $row = $result->fetch_assoc();
 //Informacion del proyecto evaluado
-$sqli = "SELECT * FROM  users";
+$sqli = "SELECT user, nombreCom, tipo, estado FROM users WHERE id_user = '$usuarioEditar'";
 $rowi = $mysqli->query($sqli);
+
 
 ?>
 
@@ -114,7 +133,7 @@ $rowi = $mysqli->query($sqli);
 							 <span class="fa-layers-counter">1,419</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Usuarios   <i class="fas fa-users fa-lg"></i></a>
+              <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
@@ -144,53 +163,59 @@ $rowi = $mysqli->query($sqli);
 		 <br>
 		 <div class="col-lg-12">
 			 <br>
-			 <h1 align="center"><font size="6">Usuarios activos o inactivos </font></h1>
+			 <h1 align="center"><font size="6">Editar usuario </font></h1>
 			 <br>
 		 </div>
 		 <br>
-			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-condensed" align="center">
-					 <tr class="info" >
-							 <th>Nombre</th>
-							 <th>Usuario</th>
-							 <th>Estado</th>
-							 <th>Tipo</th>
-							 <th><a href="#"></a></th>
 
-					 </tr>
+		 <form method="POST" action="<?php $_SERVER['PHP_SELF'] ?>" autocomplete="off" enctype="multipart/form-data">
+			<div class="row w-100 align-items-center">
+				<table class="table table-bordered col-md-6" align="center">
 					 <?php
 					 while ($usuarios = $rowi->fetch_array(MYSQLI_BOTH)) {
+				 echo " <tr>";
+	 			 echo "<th>Nombre</th>";
+	 			 echo "<th align='center'>"; echo $usuarios['nombreCom'];"</th>";
+	 			 echo "</tr>";
 
-					echo "<tr>";
-					echo "<td align='center'>"; echo $usuarios['nombreCom']; "</td>";
-					echo "<td align='center'>"; echo $usuarios['user']; "</td>";
-					if($usuarios['estado']=='1'){
-						$aux="Activo";
-					}else{
-						$aux="Inactivo";
-					}
-					echo "<td align='center'>"; echo $aux; "</td>";
-					if($usuarios['tipo']=='1'){
-						$aux2="Administrador";
-					}else{
-						$aux2="Emprendedor";
-					}
-					echo "<td align='center'>"; echo $aux2; "</td>";
+				 echo " <tr>";
+	 			 echo "<th>Usuario</th>";
+	 			 echo "<th align='center'>"; echo $usuarios['user'];"</th>";
+	 			 echo "</tr>";
 
-					echo "<td align='center'><a href='editar_usuarios.php?id=".$usuarios['id_user']."'><button type='button' class='btn btn-success'>Editar usuario</button></a></td>";
+				 echo " <tr>";
+	 			 echo "<th>Tipo</th>";
+				 if($usuarios['tipo']==1){
+					 $aux="Administrador";
+				 }else {
+				 	$aux="Emprendedor";
+				 }
+	 			 echo "<th align='center'>"; echo $aux; "</th>";
+	 			 echo "</tr>";
 
-					echo "</tr>";
-
+				 echo " <tr>";
+	 			 echo "<th>Estado</th>";
+	 			 echo "<th align='center'> <select class='form-control' id='estado' name='estado' value=''>
+					 <option value='1'>Activo</option>
+					 <option value='0'>Inactivo</option>
+				 </select> </th>";
+	 			 echo "</tr>";
 			}
-
 			?>
-
 	</table>
 </div>
+<div class="row w-100 align-items-center">
+	<div class="col text-center">
+		<button type="submit" class="btn btn-primary" >
+		Actualizar
+		</button>
+	</div>
+</div>
+</form>
+
     <br>
 		<br>
 		<br>
-
     </div>
     <!-- /.container -->
 

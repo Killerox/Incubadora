@@ -13,6 +13,12 @@ function passwordGenerator()
     return implode($pass);
 }
 
+function hashPassword($password)
+{
+  $hash = password_hash($password, PASSWORD_DEFAULT);
+  return $hash;
+}
+
 function getEnvFromServer()
 {
     echo getenv("ANDROID_HOME");

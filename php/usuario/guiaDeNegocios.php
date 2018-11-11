@@ -142,7 +142,7 @@ gtag('config', 'UA-100554272-8');
 			document.getElementById("tabla10").style.display = "none";
 			document.getElementById("tabla11").style.display = "none";
 			document.getElementById("tabla12").style.display = "none";
-			document.getElementById("tabla13").style.display = "none";
+
 
 		 var estado1 = '<?= addslashes($row1['estado']) ?>';
 		 if (estado1 == "") {
@@ -160,7 +160,7 @@ gtag('config', 'UA-100554272-8');
  			btnNuevo1.disabled = true;
      }
 
-		 var estado2 = '<?= addslashes($row2['estado']) ?>'; ///
+		 var estado2 = '<?= addslashes($row2['estado']) ?>';
 		 if (estado2 == "") {
 			 var btnModi2 = document.getElementById("btnModificar2");
  			 btnModi2.disabled = true;
@@ -359,7 +359,6 @@ gtag('config', 'UA-100554272-8');
 			var tabla10 = 	document.getElementById("tabla10");
 			var tabla11 = 	document.getElementById("tabla11");
 			var tabla12 = 	document.getElementById("tabla12");
-			var tabla13 = 	document.getElementById("tabla13");
 
 			switch (b.id) {
 				case "boton1":
@@ -518,18 +517,6 @@ gtag('config', 'UA-100554272-8');
 						}
 						break;
 
-						case "boton13":
-						if(tabla13.style.display == "none"){
-							var estado = "tabla13";
-							mostrar(estado);
-							document.getElementById("boton13").value = "Ocultar";
-						}
-						else {
-							var estado = "tabla13";
-							ocultar(estado);
-							document.getElementById("boton13").value = "Mostrar";
-						}
-						break;
 				default:
 
 			}
@@ -577,20 +564,19 @@ gtag('config', 'UA-100554272-8');
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="usuario.php">Estado del proyecto</a>
+						<li class="nav-item">
+              <a class="nav-link" href="usuario.php">Estado del proyecto  <i class="fas fa-project-diagram fa-lg"></i></a>
             </li>
-						<li class="nav-item active">
-              <a class="nav-link" >Guia de negocios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="configuracion.php">Configuracion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Estado de cuenta</a>
+						<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+						<span class="fa-layers-counter">5</span></a>
+						<li class="nav-item">
+              <a class="nav-link active" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">Cerrar sesion</a>
+              <a class="nav-link" href="configuracion.php">Configuración  <i class="fas fa-cogs fa-lg"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../logout.php">Cerrar sesión  <i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
         </div>
@@ -609,25 +595,69 @@ gtag('config', 'UA-100554272-8');
             <a href="#" class="list-group-item"><?php echo utf8_decode($row['sector1']); ?></a>
             <a href="#" class="list-group-item"><?php echo utf8_decode($row['sector2']); ?></a>
           </div>
-          <br>
-          <br>
         </div>
         <!-- /.col-lg-3 -->
         <div class="col-lg-9">
           <br>
-					<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-						<div class="panel-title col-md-9">1.- Descripción de la empresa
+					<h1 class="my-4" align="center"><font size="6">Guia de negocios de <?php echo utf8_decode($row['Pnombre']); ?></font></h1>
+					<div class="table-responsive">
+							<table class="table table-bordered table-hover" align="center">
+								<tr>
+								<td align="center" width="700"><font size="5">1.- Descripción de la empresa</font></td>
+								<td align="center"><input onclick="clickaction(this)" id="boton1" type="submit" value="Mostrar" class="btn btn-success" align="right"></td>
+                </tr>
+								</table>
+									</div>
+								<div class="table-responsive">
+									<br>
+										<table id="tabla1" class="table table-bordered table-hover table-condensed" align="center">
+											 <tr class="info" >
+													 <th>Estado</th>
+													 <th>Fecha</th>
+													 <th></th>
+													 <th></th>
 
-						</div>
+											 </tr>
+											<tr>
+											<?php
+
+											if ($row1['estado']==null) {
+												$aux = "No enviado";
+											}else {
+											  $aux = $row1['estado'];
+											}
+											echo "<td align='center'>"; echo $aux; "</td>";
+											if ($row1['fecha']==null) {
+												$aux1 = "No enviado";
+											}else {
+												$aux1 = $row1['fecha'];
+											}
+											$aux = 1;
+											echo "<td align='center'>"; echo $aux1; "</td>";
+
+											echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo1' class='btn btn-success'>Nuevo</button></a></td>";
+											echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar1' class='btn btn-success'>Modificar</button></a></td>";
+											?>
+									   </tr>
+           </table>
 					</div>
-          <div class="col-3">
-						<div class="panel">
-								<input onclick="clickaction(this)" id="boton1" type="submit" value="Mostrar" class="btn btn-success" align="right">
-						</div>
-          </div>
+	</div>
+</div>
+</div>
+
+    <div class="container">
+		<div class="row">
+		<div class="col-lg-3">
+		</div>
+    <div class="col-lg-9">
+		<div class="table-responsive">
+				<table class="table table-bordered table-hover" align="center">
+					<tr>
+					<td align="center" width="700"><font size="5">2.- Descripción del entorno</font></td>
+					<td align="center"><input id="boton2" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
 					<div class="table-responsive">
 						<br>
-							<table id="tabla1" class="table table-bordered table-hover table-condensed" align="center">
+							<table id="tabla2" class="table table-bordered table-hover table-condensed" align="center">
 								 <tr class="info" >
 										 <th>Estado</th>
 										 <th>Fecha</th>
@@ -638,504 +668,523 @@ gtag('config', 'UA-100554272-8');
 								<tr>
 								<?php
 
-								if ($row1['estado']==null) {
+								if ($row2['estado']==null) {
 									$aux = "No enviado";
 								}else {
-								  $aux = $row1['estado'];
+									$aux = $row2['estado'];
 								}
 								echo "<td align='center'>"; echo $aux; "</td>";
-								if ($row1['fecha']==null) {
+								if ($row2['fecha']==null) {
 									$aux1 = "No enviado";
 								}else {
-									$aux1 = $row1['fecha'];
+									$aux1 = $row2['fecha'];
 								}
-								$aux = 1;
+								$aux=2;
 								echo "<td align='center'>"; echo $aux1; "</td>";
-
-								echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo1' class='btn btn-success'>Nuevo</button></a></td>";
-								echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar1' class='btn btn-success'>Modificar</button></a></td>";
+								echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo2' class='btn btn-success'>Nuevo</button></a></td>";
+								echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar2' class='btn btn-success'>Modificar</button></a></td>";
 								?>
-						   </tr>
+							 </tr>
 				</table>
-		</div>
-
-		<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-			<div class="panel-title col-md-9">2.- Descripción del entorno
-				<input id="boton2" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-			</div>
-		</div>
-
-		<div class="table-responsive">
-			<br>
-				<table id="tabla2" class="table table-bordered table-hover table-condensed" align="center">
-					 <tr class="info" >
-							 <th>Estado</th>
-							 <th>Fecha</th>
-							 <th></th>
-							 <th></th>
-
-					 </tr>
-					<tr>
-					<?php
-
-					if ($row2['estado']==null) {
-						$aux = "No enviado";
-					}else {
-						$aux = $row2['estado'];
-					}
-					echo "<td align='center'>"; echo $aux; "</td>";
-					if ($row2['fecha']==null) {
-						$aux1 = "No enviado";
-					}else {
-						$aux1 = $row2['fecha'];
-					}
-					$aux=2;
-					echo "<td align='center'>"; echo $aux1; "</td>";
-					echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo2' class='btn btn-success'>Nuevo</button></a></td>";
-					echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar2' class='btn btn-success'>Modificar</button></a></td>";
-					?>
-				 </tr>
+				</div>
+					</tr>
 	</table>
-	</div>
+ </div>
+</div>
+</div>
+</div>
 
-	<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-		<div class="panel-title col-md-12">3.- Análisis del producto y su mercado
-			<input id="boton3" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
+<div class="table-responsive">
+		<table class="table table-bordered table-hover" align="center">
+			<tr>
+			<td align="center" width="700"><font size="5">3.- Análisis del producto y su mercado</font></td>
+			<td align="center"><input id="boton3" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla3" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
+
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row3['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row3['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row3['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row3['fecha'];
+						}
+						$aux=3;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo3' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar3' class='btn btn-success'>Modificar</button></a></td>";
+
+						?>
+					 </tr>
+		</table>
 		</div>
-	</div>
-
-	<div class="table-responsive">
-		<br>
-			<table id="tabla3" class="table table-bordered table-hover table-condensed" align="center">
-				 <tr class="info" >
-						 <th>Estado</th>
-						 <th>Fecha</th>
-						 <th></th>
-						 <th></th>
-
-				 </tr>
-				<tr>
-				<?php
-
-				if ($row3['estado']==null) {
-					$aux = "No enviado";
-				}else {
-					$aux = $row3['estado'];
-				}
-				echo "<td align='center'>"; echo $aux; "</td>";
-				if ($row3['fecha']==null) {
-					$aux1 = "No enviado";
-				}else {
-					$aux1 = $row3['fecha'];
-				}
-				$aux=3;
-				echo "<td align='center'>"; echo $aux1; "</td>";
-				echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo3' class='btn btn-success'>Nuevo</button></a></td>";
-				echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar3' class='btn btn-success'>Modificar</button></a></td>";
-
-				?>
-			 </tr>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">4.- Estrategia de mercadotecnia
-		<input id="boton4" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla4" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">4.- Estrategia de mercadotecnia</font></td>
+			<td align="center"><input id="boton4" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla4" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row4['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row4['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row4['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row4['fecha'];
-			}
-			$aux=4;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo4' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar4' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row4['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row4['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row4['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row4['fecha'];
+						}
+						$aux=4;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo4' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar4' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">5.- Plan de venta
-		<input id="boton5" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla5" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">5.- Plan de venta</font></td>
+			<td align="center"><input id="boton5" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla5" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row5['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row5['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row5['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row5['fecha'];
-			}
-			$aux=5;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo5' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar5' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row5['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row5['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row5['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row5['fecha'];
+						}
+						$aux=5;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo5' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar5' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">6.- Plan de operaciones del proyecto
-		<input id="boton6" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla6" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">6.- Plan de operaciones del proyecto</font></td>
+			<td align="center">	<input id="boton6" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla6" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row6['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row6['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row6['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row6['fecha'];
-			}
-			$aux=6;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo6' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar6' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row6['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row6['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row6['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row6['fecha'];
+						}
+						$aux=6;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo6' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar6' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">7.- Recursos humanos
-		<input id="boton7" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla7" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">7.- Recursos humanos</font></td>
+			<td align="center"><input id="boton7" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla7" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row7['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row7['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row7['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row7['fecha'];
-			}
-			$aux=7;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo7' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar7' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row7['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row7['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row7['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row7['fecha'];
+						}
+						$aux=7;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo7' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar7' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">8.- Aspectos legales
-		<input id="boton8" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla8" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">8.- Aspectos legales</font></td>
+			<td align="center"><input id="boton8" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla8" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row8['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row8['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row8['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row8['fecha'];
-			}
-			$aux=8;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo8' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar8' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row8['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row8['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row8['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row8['fecha'];
+						}
+						$aux=8;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo8' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar8' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">9.- Planes de lanzamiento
-		<input id="boton9" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla9" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">9.- Planes de lanzamiento</font></td>
+			<td align="center"><input id="boton9" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla9" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row9['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row9['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row9['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row9['fecha'];
-			}
-			$aux = 9;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo9' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar9' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row9['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row9['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row9['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row9['fecha'];
+						}
+						$aux = 9;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo9' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar9' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">10.- Plan financiero y evaluación de proyectos
-		<input id="boton10" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla10" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">10.- Plan financiero y evaluación de proyectos</font></td>
+			<td align="center"><input id="boton10" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla10" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row10['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row10['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row10['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row10['fecha'];
-			}
-			$aux = 10;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo10' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar10' class='btn btn-success'>Modificar</button></a></td>";
+						 </tr>
+						<tr>
+						<?php
 
-			?>
-		 </tr>
+						if ($row10['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row10['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row10['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row10['fecha'];
+						}
+						$aux = 10;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo10' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar10' class='btn btn-success'>Modificar</button></a></td>";
+
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">11.- Plan de inversión y financiamiento
-		<input id="boton11" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla11" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">11.- Plan de inversión y financiamiento</font></td>
+			<td align="center"><input id="boton11" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla11" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row11['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row11['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row11['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row11['fecha'];
-			}
-			$aux = 11;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo11' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar11' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row11['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row11['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row11['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row11['fecha'];
+						}
+						$aux = 11;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo11' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar11' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">12.- Conclusiones
-		<input id="boton12" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
+</div>
+</div>
 </div>
 
+<div class="container">
+<div class="row">
+<div class="col-lg-3">
+</div>
+<div class="col-lg-9">
 <div class="table-responsive">
-	<br>
-		<table id="tabla12" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
+		<table class="table table-bordered table-hover" align="center">
 			<tr>
-			<?php
+			<td align="center" width="700"><font size="5">12.- Conclusiones</font></td>
+			<td align="center"><input id="boton12" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"></td>
+			<div class="table-responsive">
+				<br>
+					<table id="tabla12" class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Estado</th>
+								 <th>Fecha</th>
+								 <th></th>
+								 <th></th>
 
-			if ($row12['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row12['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row12['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row12['fecha'];
-			}
-			$aux = 12;
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo12' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar12' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
+						 </tr>
+						<tr>
+						<?php
+
+						if ($row12['estado']==null) {
+							$aux = "No enviado";
+						}else {
+							$aux = $row12['estado'];
+						}
+						echo "<td align='center'>"; echo $aux; "</td>";
+						if ($row12['fecha']==null) {
+							$aux1 = "No enviado";
+						}else {
+							$aux1 = $row12['fecha'];
+						}
+						$aux = 12;
+						echo "<td align='center'>"; echo $aux1; "</td>";
+						echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnNuevo12' class='btn btn-success'>Nuevo</button></a></td>";
+						echo "<td align='center'><a href='editarP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar12' class='btn btn-success'>Modificar</button></a></td>";
+						?>
+					 </tr>
+			</table>
+			</div>
+			</tr>
 </table>
 </div>
-
-<div class="p-2 mb-1 bg-secondary text-white col-lg-7">
-	<div class="panel-title col-md-12">13.- Anexos
-		<input id="boton13" type="submit" value="Mostrar" class="btn btn-success" onclick="clickaction(this)"><i class="icon-hand-right"></i>
-	</div>
 </div>
-
-<div class="table-responsive">
-	<br>
-		<table id="tabla13" class="table table-bordered table-hover table-condensed" align="center">
-			 <tr class="info" >
-					 <th>Estado</th>
-					 <th>Fecha</th>
-					 <th></th>
-					 <th></th>
-
-			 </tr>
-			<tr>
-			<?php
-
-			if ($row1['estado']==null) {
-				$aux = "No enviado";
-			}else {
-				$aux = $row1['estado'];
-			}
-			echo "<td align='center'>"; echo $aux; "</td>";
-			if ($row1['fecha']==null) {
-				$aux1 = "No enviado";
-			}else {
-				$aux1 = $row1['fecha'];
-			}
-			echo "<td align='center'>"; echo $aux1; "</td>";
-			echo "<td align='center'><a href='eliminar.php?id=".$row['folio']."'><button type='button' class='btn btn-success'>Nuevo</button></a></td>";
-			echo "<td align='center'><a href='registroP.php?id=".$row['folio']."&punto=".$aux."'><button type='button' id='btnModificar13' class='btn btn-success'>Modificar</button></a></td>";
-			?>
-		 </tr>
-</table>
 </div>
-
-
 </div>
-
-        <!-- /.col-lg-9 -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container -->
 
     <!-- Footer -->
 		<footer>

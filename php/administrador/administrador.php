@@ -19,9 +19,15 @@ $result = $mysqli->query($sql);
 $row = $result->fetch_assoc();
 //Solo mostrara los proyectos no activos
 $activo = 0;
+$tota = 0;
 $bdproyecto = "SELECT * FROM  registroproyecto WHERE activo like '$activo'";
 $resbdproyecto = $mysqli->query($bdproyecto);
-
+//Cantidad de Solicitudes
+$total="SELECT * FROM registroproyecto WHERE activo='$activo'";
+$consulta=$mysqli->query($total);
+while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
+	$tota=$tota+1;
+}
 ?>
 
 <html lang="en">
@@ -104,7 +110,7 @@ $resbdproyecto = $mysqli->query($bdproyecto);
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="#"><?php echo 'Bienvenid@ '.utf8_decode($row['user']); ?></a>
+        <a class="navbar-brand" href="#"><?php echo ''.utf8_decode($row['user']); ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -112,22 +118,26 @@ $resbdproyecto = $mysqli->query($bdproyecto);
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                <a class="nav-link" href="#">Solicitudes   <i class="fab fa-wpforms fa-lg"></i>
-							 <span class="fa-layers-counter">1,419</span></a>
+							 <span class="fa-layers-counter"><?php echo $tota; ?></span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Proyectos activos</a>
+              <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
             </li>
 						<li class="nav-item">
-              <a class="nav-link" href="#">Cortes</a>
+							<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+							<span class="fa-layers-counter">5</span></a>
+						</li>
+						<li class="nav-item">
+              <a class="nav-link" href="#">Cortes <i class="fas fa-database fa-lg"></i></a>
             </li>
 						<li class="nav-item">
-              <a class="nav-link" href="#">Platicas</a>
+              <a class="nav-link" href="#">Platicas <i class="fas fa-mouse-pointer fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../logout.php">Cerrar sesión</a>
+              <a class="nav-link" href="../logout.php">Cerrar sesión <i class="fas fa-sign-out-alt"></i></a>
             </li>
           </ul>
         </div>

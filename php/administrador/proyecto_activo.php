@@ -12,24 +12,23 @@ if($_SESSION['tipo']==0){
     header("Location: ../logout.php");
 }
 
-
-//Informacion del usuario activo
 $folio = $_SESSION['folio'];
+
 $sql = "SELECT id_user, user FROM users WHERE folio = '$folio'";
 $result = $mysqli->query($sql);
 $row = $result->fetch_assoc();
-//Informacion del proyecto evaluado
-$sqli = "SELECT * FROM  users";
-$rowi = $mysqli->query($sqli);
-$activo = 0;
-$tota= 0;
+//Solo mostrara los proyectos activos
+$activo = 1;
+$tota = 0;
+$solicitud = 0;
+$bdproyecto = "SELECT * FROM  registroproyecto WHERE activo like '$activo'";
+$resbdproyecto = $mysqli->query($bdproyecto);
 //Cantidad de Solicitudes
-$total="SELECT * FROM registroproyecto WHERE activo='$activo'";
+$total="SELECT * FROM registroproyecto WHERE activo='$solicitud'";
 $consulta=$mysqli->query($total);
 while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
 	$tota=$tota+1;
 }
-
 ?>
 
 <html lang="en">
@@ -85,6 +84,7 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
     <link href="../../css/shop-homepage.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
+
   </head>
 
   <body>
@@ -117,18 +117,18 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-						<li class="nav-item">
+            <li class="nav-item">
                <a class="nav-link" href="administrador.php">Solicitudes   <i class="fab fa-wpforms fa-lg"></i>
 							 <span class="fa-layers-counter"><?php echo $tota; ?></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Usuarios   <i class="fas fa-users fa-lg"></i></a>
-            </li>
             <li class="nav-item">
-              <a class="nav-link" href="proyecto_activo.php">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
+              <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
             </li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+							<a class="nav-link" href="notificaciones.php">Notificaciones   <i class="far fa-envelope fa-lg"></i>
 							<span class="fa-layers-counter">5</span></a>
 						</li>
 						<li class="nav-item">
@@ -147,53 +147,40 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
 
     <!-- Page Content -->
     <div class="container">
-
+			<div class="col-lg-12">
+ 			 <br>
+ 			 <h1 align="center"><font size="6">Proyectos activos</font></h1>
+ 			 <br>
+ 		 </div>
 		 <br>
-		 <br>
-		 <div class="col-lg-12">
-			 <br>
-			 <h1 align="center"><font size="6">Usuarios activos o inactivos </font></h1>
-			 <br>
-		 </div>
 		 <br>
 			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-condensed" align="center">
-					 <tr class="info" >
-							 <th>Nombre</th>
-							 <th>Usuario</th>
-							 <th>Estado</th>
-							 <th>Tipo</th>
-							 <th><a href="#"></a></th>
+					<table class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Folio</th>
+								 <th>Nombre del proyecto</th>
+								 <th>Nombre responsable</th>
+								 <th>Correo electronico</th>
+								 <th>Fecha de registro</th>
 
-					 </tr>
-					 <?php
-					 while ($usuarios = $rowi->fetch_array(MYSQLI_BOTH)) {
 
-					echo "<tr>";
-					echo "<td align='center'>"; echo $usuarios['nombreCom']; "</td>";
-					echo "<td align='center'>"; echo $usuarios['user']; "</td>";
-					if($usuarios['estado']=='1'){
-						$aux="Activo";
-					}else{
-						$aux="Inactivo";
-					}
-					echo "<td align='center'>"; echo $aux; "</td>";
-					if($usuarios['tipo']=='1'){
-						$aux2="Administrador";
-					}else{
-						$aux2="Emprendedor";
-					}
-					echo "<td align='center'>"; echo $aux2; "</td>";
+						 </tr>
+						 <?php
+						 while ($proyecto = $resbdproyecto->fetch_array(MYSQLI_BOTH)) {
 
-					echo "<td align='center'><a href='editar_usuarios.php?id=".$usuarios['id_user']."'><button type='button' class='btn btn-success'>Editar usuario</button></a></td>";
 
-					echo "</tr>";
+						echo "<tr>";
+						echo "<td align='center'>"; echo $proyecto['folio']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['Pnombre']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['nombre']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['email']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['fecha']; "</td>";
+						echo "</tr>";
 
-			}
+				}
 
-			?>
-
-	</table>
+				?>
+		</table>
 </div>
     <br>
 		<br>

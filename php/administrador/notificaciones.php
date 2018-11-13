@@ -12,24 +12,30 @@ if($_SESSION['tipo']==0){
     header("Location: ../logout.php");
 }
 
-
-//Informacion del usuario activo
 $folio = $_SESSION['folio'];
+
 $sql = "SELECT id_user, user FROM users WHERE folio = '$folio'";
 $result = $mysqli->query($sql);
 $row = $result->fetch_assoc();
-//Informacion del proyecto evaluado
-$sqli = "SELECT * FROM  users";
-$rowi = $mysqli->query($sqli);
-$activo = 0;
-$tota= 0;
+//Solo mostrara los proyectos activos
+$tipo = "administrador";
+$tota = 0;
+$tota2 = 0;
+$solicitud = 0;
+$bdproyecto = "SELECT * FROM  notificaciones WHERE destino like '$tipo'";
+$resbdproyecto = $mysqli->query($bdproyecto);
 //Cantidad de Solicitudes
-$total="SELECT * FROM registroproyecto WHERE activo='$activo'";
+$total="SELECT * FROM registroproyecto WHERE activo='$solicitud'";
 $consulta=$mysqli->query($total);
 while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
 	$tota=$tota+1;
 }
-
+//Cantidad de notificaciones
+$total2="SELECT * FROM notificaciones WHERE destino = '$tipo'";
+$consulta2=$mysqli->query($total2);
+while ($proyecto2 = $consulta2->fetch_array(MYSQLI_BOTH)) {
+	$tota2=$tota2+1;
+}
 ?>
 
 <html lang="en">
@@ -85,6 +91,7 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
     <link href="../../css/shop-homepage.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
+
   </head>
 
   <body>
@@ -117,19 +124,19 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-						<li class="nav-item">
+            <li class="nav-item">
                <a class="nav-link" href="administrador.php">Solicitudes   <i class="fab fa-wpforms fa-lg"></i>
 							 <span class="fa-layers-counter"><?php echo $tota; ?></span></a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Usuarios   <i class="fas fa-users fa-lg"></i></a>
+            <li class="nav-item">
+              <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="proyecto_activo.php">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
+              <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
             </li>
-						<li class="nav-item">
+						<li class="nav-item active">
 							<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
-							<span class="fa-layers-counter">5</span></a>
+							<span class="fa-layers-counter"><?php echo $tota2; ?></span></a>
 						</li>
 						<li class="nav-item">
               <a class="nav-link" href="#">Cortes <i class="fas fa-database fa-lg"></i></a>
@@ -147,53 +154,40 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
 
     <!-- Page Content -->
     <div class="container">
-
+			<div class="col-lg-12">
+ 			 <br>
+ 			 <h1 align="center"><font size="6">Notificaciones recientes</font></h1>
+ 			 <br>
+ 		 </div>
 		 <br>
-		 <br>
-		 <div class="col-lg-12">
-			 <br>
-			 <h1 align="center"><font size="6">Usuarios activos o inactivos </font></h1>
-			 <br>
-		 </div>
 		 <br>
 			<div class="table-responsive">
-				<table class="table table-bordered table-hover table-condensed" align="center">
-					 <tr class="info" >
-							 <th>Nombre</th>
-							 <th>Usuario</th>
-							 <th>Estado</th>
-							 <th>Tipo</th>
-							 <th><a href="#"></a></th>
+					<table class="table table-bordered table-hover table-condensed" align="center">
+						 <tr class="info" >
+								 <th>Folio</th>
+								 <th>Nombre del proyecto</th>
+								 <th>Guia de negocios</th>
+								 <th>Fecha</th>
+								 <th></th>
 
-					 </tr>
-					 <?php
-					 while ($usuarios = $rowi->fetch_array(MYSQLI_BOTH)) {
+						 </tr>
+						 <?php
+						 while ($proyecto = $resbdproyecto->fetch_array(MYSQLI_BOTH)) {
 
-					echo "<tr>";
-					echo "<td align='center'>"; echo $usuarios['nombreCom']; "</td>";
-					echo "<td align='center'>"; echo $usuarios['user']; "</td>";
-					if($usuarios['estado']=='1'){
-						$aux="Activo";
-					}else{
-						$aux="Inactivo";
-					}
-					echo "<td align='center'>"; echo $aux; "</td>";
-					if($usuarios['tipo']=='1'){
-						$aux2="Administrador";
-					}else{
-						$aux2="Emprendedor";
-					}
-					echo "<td align='center'>"; echo $aux2; "</td>";
 
-					echo "<td align='center'><a href='editar_usuarios.php?id=".$usuarios['id_user']."'><button type='button' class='btn btn-success'>Editar usuario</button></a></td>";
+						echo "<tr>";
+						echo "<td align='center'>"; echo $proyecto['folio']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['nombre_proyecto']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['punto']; "</td>";
+						echo "<td align='center'>"; echo $proyecto['hora']; "</td>";
+						echo "<td align='center'><a href='evaluarPunto.php?id=".$proyecto['folio']."&punto=".$proyecto['punto']."'><button type='button' class='btn btn-success'>Ver</button></a></td>";
 
-					echo "</tr>";
+						echo "</tr>";
 
-			}
+				}
 
-			?>
-
-	</table>
+				?>
+		</table>
 </div>
     <br>
 		<br>

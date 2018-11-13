@@ -111,7 +111,7 @@ gtag('config', 'UA-100554272-8');
             <li class="nav-item active">
               <a class="nav-link" href="#">Estado del proyecto  <i class="fas fa-project-diagram fa-lg"></i></a>
             </li>
-						<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>
+						<a class="nav-link" href="notificaciones.php">Notificaciones   <i class="far fa-envelope fa-lg"></i>
 						<span class="fa-layers-counter">5</span></a>
 						<li class="nav-item">
               <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>

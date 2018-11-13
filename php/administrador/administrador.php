@@ -124,7 +124,7 @@ while ($proyecto = $consulta->fetch_array(MYSQLI_BOTH)) {
               <a class="nav-link" href="usuarios.php">Usuarios   <i class="fas fa-users fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
+              <a class="nav-link" href="proyecto_activo.php">Proyectos activos <i class="fas fa-archive fa-lg"></i></a>
             </li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Notificaciones   <i class="far fa-envelope fa-lg"></i>

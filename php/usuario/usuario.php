@@ -117,7 +117,7 @@ gtag('config', 'UA-100554272-8');
               <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="configuracion.php">Configuración  <i class="fas fa-cogs fa-lg"></i></a>
+              <a class="nav-link" href="fichaTecnica.php">Configuración  <i class="fas fa-cogs fa-lg"></i></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../logout.php">Cerrar sesión  <i class="fas fa-sign-out-alt"></i></a>

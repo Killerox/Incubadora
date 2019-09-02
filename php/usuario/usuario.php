@@ -13,18 +13,26 @@ if($_SESSION['tipo']==1){
 }
 
 $folio = $_SESSION['folio'];
-
+//informacion del ususario
 $sql = "SELECT folio, Pnombre, nombre, sector1, sector2 FROM registroproyecto WHERE folio = '$folio'";
 $result = $mysqli->query($sql);
-
 $row = $result->fetch_assoc();
 
-#$bdproyecto = "SELECT * FROM  registroproyecto";
-#$resbdproyecto = $mysqli->query($bdproyecto);
+//Cantidad de notificaciones
+$tota2 = 0;
+$total2="SELECT * FROM notificaciones WHERE folio = '$folio'";
+$consulta2=$mysqli->query($total2);
+while ($proyecto2 = $consulta2->fetch_array(MYSQLI_BOTH)) {
+$tota2=$tota2+1;
+}
 
+//Ficha tenica
+$sql2 = "SELECT estatus_ficha FROM users WHERE folio = '$folio'";
+$result2 = $mysqli->query($sql2);
+$row2 = $result2->fetch_assoc();
 ?>
 
-<html>
+<html lang="en">
 
 <head>
 
@@ -112,7 +120,7 @@ gtag('config', 'UA-100554272-8');
               <a class="nav-link" href="#">Estado del proyecto  <i class="fas fa-project-diagram fa-lg"></i></a>
             </li>
 						<a class="nav-link" href="notificaciones.php">Notificaciones   <i class="far fa-envelope fa-lg"></i>
-						<span class="fa-layers-counter">5</span></a>
+						<span class="fa-layers-counter"><?php echo $tota2; if($row2['estatus_ficha']==NULL){header("Location: fichaTecnica.php");}?></span></a>
 						<li class="nav-item">
               <a class="nav-link" href="guiaDeNegocios.php">Guia de negocios  <i class="fas fa-list-ol fa-lg"></i></a>
             </li>

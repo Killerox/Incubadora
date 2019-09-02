@@ -18,54 +18,6 @@ $sql = "SELECT folio, Pnombre, nombre, sector1, sector2 FROM registroproyecto WH
 $result = $mysqli->query($sql);
 $row = $result->fetch_assoc();
 
-$sqli = "SELECT activo FROM registroproyecto WHERE folio = '$folio'";
-$resulti = $mysqli->query($sqli);
-$rowi = $resulti->fetch_assoc();
-
-if($rowi['activo']==0){
-	$estado = "Inactivo";
-}else{
-	$estado = "Activo";
-}
-
-if (!empty($_POST)) {
-	$pas1 = $mysqli->real_escape_string($_POST['Ipass']);
-	$pas2 = $mysqli->real_escape_string($_POST['Ipass2']);
-	if ($pas1 == $pas2) {
-
-		$pas = hashPassword($pas1);
-
-		$stmt = "UPDATE users SET password='$pas' WHERE folio='$folio'";
-    $resultado = $mysqli->query($stmt);
-
-		#$resultado = mysqli_query($mysqli, $stmt);
-		if(!$resultado){
-			$mysqli->rollback();
-			echo " <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-	            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-	              <span aria-hidden='true'>&times;</span>
-	              </button>
-	               <strong>¡Error!</strong> No se pudo actualizar, intenta mas tarde
-	            </div> ";
-		} else{
-			$mysqli->commit();
-			echo " <div class='alert alert-success alert-dismissible fade show' role='alert'>
-	            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-	              <span aria-hidden='true'>&times;</span>
-	              </button>
-	               <strong>¡Bien hecho!</strong> Tus contraseñas se actualizaron correctamente
-	            </div> ";
-		}
-	}else {
-		echo " <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-              <span aria-hidden='true'>&times;</span>
-              </button>
-               <strong>¡Error!</strong> Tus contraseñas no coinciden
-            </div> ";
-	}
-}
-
 ?>
 
 <html>
@@ -212,35 +164,35 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-6 control-label">1.1 Nombre comercial y slogan de la empresa:*</label>
 											<div class="col-md-12">
-												<input type="text" class="form-control" name="Ipass" placeholder="" value="" required >
+												<input type="text" class="form-control" name="nombre" placeholder=""required >
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-8 control-label">1.2 Registro federal de contribuyentes de la empresa:</label>
 											<div class="col-md-12">
-												<input type="text" class="form-control" name="Ipass2" placeholder="" value="">
+												<input type="text" class="form-control" name="rfce" placeholder="">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-8 control-label">1.3 CURP del responsable del proyecto:*</label>
 											<div class="col-md-12">
-												<input type="text" class="form-control" name="Ipass2" placeholder="" value="" required>
+												<input type="text" class="form-control" name="curp" placeholder="" required>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-8 control-label">1.4 FAX:</label>
 											<div class="col-md-12">
-												<input type="text" class="form-control" name="Ipass2" placeholder="" value="">
+												<input type="text" class="form-control" name="fax" placeholder="" value="">
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-8 control-label">1.5 ¿Cuánto tiempo lleva desarrollando su proyecto?:*</label>
 											<div class="col-md-12">
-												<input type="text" class="form-control" name="Ipass2" placeholder="" value="" required>
+												<input type="text" class="form-control" name="tiempo" placeholder="" value="" required>
 											</div>
 										</div>
 
@@ -256,16 +208,16 @@ gtag('config', 'UA-100554272-8');
 													<th>En qué consistió el Apoyo</th>
                          </tr>
 												 <tr>
-												 	<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="Estatal/Federal" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="Breve descripción de las actividades, indicar número y nombre de la convocatoria o proyecto " value="" required></td>
+												 	<td><input type="text" class="form-control" name="apoyo[]"></td>
+													<td><input type="text" class="form-control" name="apoyo[]"></td>
+													<td><input type="text" class="form-control" name="apoyo[]" placeholder="Estatal/Federal"></td>
+													<td><input type="text" class="form-control" name="apoyo[]" placeholder="Breve descripción de las actividades, indicar número y nombre de la convocatoria o proyecto " ></td>
 												 </tr>
 												 <tr>
-												 	<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="Estatal/Federal" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="Breve descripción de las actividades, indicar número y nombre de la convocatoria o proyecto " value="" required></td>
+												 	<td><input type="text" class="form-control" name="apoyo[]"></td>
+													<td><input type="text" class="form-control" name="apoyo[]"></td>
+													<td><input type="text" class="form-control" name="apoyo[]" placeholder="Estatal/Federal"></td>
+													<td><input type="text" class="form-control" name="apoyo[]" placeholder="Breve descripción de las actividades, indicar número y nombre de la convocatoria o proyecto " ></td>
 												 </tr>
                       	</table>
                       </div>
@@ -284,16 +236,16 @@ gtag('config', 'UA-100554272-8');
 													<th>¿En qué te ayudo recibirlo?</th>
                          </tr>
 												 <tr>
-												 	<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
+												 	<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
 												 </tr>
 												 <tr>
-												 	<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
-													<td><input type="text" class="form-control" name="Ipass2" placeholder="" value="" required></td>
+												 	<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
+													<td><input type="text" class="form-control" name="premio[]"></td>
 												 </tr>
                       	</table>
                       </div>
@@ -307,38 +259,38 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">2.1 Descripción del Proyecto. Proporcione un breve resumen del proyecto. Máximo 2 cuartillas.*</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="descripcion" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">2.2 Objetivo del proyecto. Describa el o los objetivos de su proyecto:*</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="objetivo" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">2.3 Apoyos requeridos. Especifique el tipo de apoyo que consideren necesarios para su empresa-proyecto. Puede marcar más de una opción.*</label>
                         <div class="col-md-10">
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Diseño Industrial <br>
-											  <input type="checkbox" class="" name="" value="Diseño Industrial"> Diseño de imagen corporativa <br>
-											  <input type="checkbox" class="" name="" value="Diseño Industrial"> Procesos productivos <br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Administración <br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Propiedad industrial <br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Mercadotecnia <br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Capacitación<br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Aspectos jurídicos<br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Vinculación<br>
-												<input type="checkbox" class="" name="" value="Diseño Industrial"> Planeación estratégica<br>
-                        <input type="password" class="form-control" name="Ipass2" placeholder="Otro, especifique" value="">
+												<input type="checkbox" name="apoyoReque[]" value="Diseño Industrial"> Diseño Industrial <br>
+											  <input type="checkbox" name="apoyoReque[]" value="Diseño de imagen corporativa"> Diseño de imagen corporativa <br>
+											  <input type="checkbox" name="apoyoReque[]" value="Procesos productivos"> Procesos productivos <br>
+												<input type="checkbox" name="apoyoReque[]" value="Administración"> Administración <br>
+												<input type="checkbox" name="apoyoReque[]" value="Propiedad industrial"> Propiedad industrial <br>
+												<input type="checkbox" name="apoyoReque[]" value="Mercadotecnia"> Mercadotecnia <br>
+												<input type="checkbox" name="apoyoReque[]" value="Capacitación"> Capacitación<br>
+												<input type="checkbox" name="apoyoReque[]" value="Aspectos jurídicos"> Aspectos jurídicos<br>
+												<input type="checkbox" name="apoyoReque[]" value="Vinculación"> Vinculación<br>
+												<input type="checkbox" name="apoyoReque[]" value="Planeación estratégica"> Planeación estratégica<br>
+                        <input type="password" name="apoyoReque[]" placeholder="Otro, especifique">
 										 </div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">2.4 ¿Ha recibido apoyos para el financiamiento de su Proyecto en alguna institución o Secretaría? Si es así, especifique el monto y la institución que lo aportó:</label>
 											<div class="col-md-12">
-												<input type="password" class="form-control" name="Ipass2" placeholder="" value="">
+												<input type="password" class="form-control" name="apoyoReque2" placeholder="" value="">
 											</div>
 										</div>
 
@@ -364,26 +316,26 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">3.1 ¿Considera que su proyecto es de Base Tecnológica?*</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="tecno" placeholder="" value="Si" > Si
+												<input type="radio"  name="tecno" placeholder="" value="No" > No
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">3.2 Base Tecnológica del Proyecto. En caso que la respuesta a la pregunta 3.1 haya sido afirmativa, describa las razones por las que considera que su proyecto es de base tecnológica.</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="tecnoSi" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-10 control-label">3.3 ¿En qué grado tecnológico considera que se encuentra su Proyecto? En que caso la respuesta a la pregunta 3.1 haya sido afirmativa, seleccione una de las siguientes opciones.</label>
                         <div class="col-md-10">
-												<input type="radio"  name="tec" value="Diseño Industrial"> Idea <br>
-											  <input type="radio"  name="tec" value="Diseño Industrial"> Investigacion cientifica <br>
-											  <input type="radio"  name="tec" value="Diseño Industrial"> Desarrollo tecnológico <br>
-												<input type="radio"  name="tec" value="Diseño Industrial"> Prototipo <br>
-												<input type="radio"  name="tec" value="Diseño Industrial"> Producto en proceso de comercialización <br>
+												<input type="radio"  name="grado" value="Idea"> Idea <br>
+											  <input type="radio"  name="grado" value="Investigacion cientifica"> Investigacion cientifica <br>
+											  <input type="radio"  name="grado" value="Desarrollo tecnológico"> Desarrollo tecnológico <br>
+												<input type="radio"  name="grado" value="Prototipo"> Prototipo <br>
+												<input type="radio"  name="grado" value="Producto en proceso de comercialización"> Producto en proceso de comercialización <br>
 										 </div>
 										</div>
 
@@ -399,9 +351,9 @@ gtag('config', 'UA-100554272-8');
 											</div>
 											<label for="apellidos" class="col-md-12 control-label">El grado de innovación del producto o servicio que desarrolla o va a desarrollar lo considera como:</label>
                       <div class="col-md-12">
-												<input type="radio"  name="ino" value="Diseño Industrial"> Innovación total <br>
-												<input type="radio"  name="ino" value="Diseño Industrial"> Modificación <br>
-												<input type="radio"  name="ino" value="Diseño Industrial"> Producto estándar <br>
+												<input type="radio"  name="inno" value="Innovación total"> Innovación total <br>
+												<input type="radio"  name="inno" value="Modificación"> Modificación <br>
+												<input type="radio"  name="inno" value="Producto estándar"> Producto estándar <br>
                       </div>
 										</div>
 
@@ -417,17 +369,17 @@ gtag('config', 'UA-100554272-8');
                          </tr>
 												 <tr>
 												 	<td>Empresa de alta intensidad tecnológica</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="35" value="Empresa de alta intensidad tecnológica"></td>
 													<td> <p align="justify">Es aquella que desarrolla, produce o vende productos o servicios dentro de un sector especializado o avanzado tecnológicamente como: Tecnologías de la Información y Comunicaciones, Microelectrónica, Biotecnología, Farmacéutico. Sus requerimientos de infraestructura física y tecnológica, así como sus mecanismos de operación son altamente especializados e involucran procesos y procedimientos innovadores.</p> </td>
 												 </tr>
 												 <tr>
 												 	<td>Empresa de media intensidad tecnológica</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="35" value="Empresa de media intensidad tecnológica"></td>
 													<td> <p align="justify">Es aquella que desarrolla, produce o vende productos o servicios dentro de sectores semi-especializados o semi-avanzados entre los que se encuentran: automotriz, aeronáutica, plásticos, productos químicos, manufactura avanzada, líneas automatizadas de producción. Sus requerimientos de infraestructura física y tecnológica, así como sus mecanismos de operación, son especializados e involucran procesos y procedimientos que no están generalmente estandarizados, por lo que tiene que estar vinculada a centros e institutos de conocimiento. </p> </td>
 												 </tr>
 												 <tr>
 												 	<td>Empresa de baja intensidad tecnológica</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="35" value="Empresa de baja intensidad tecnológica"></td>
 													<td> <p align="justify">Es aquella que desarrolla productos o vende productos o servicios dentro de los sectores tradicionales entre los que se encuentran: cuero, calzado, textil, confección, agroindustria, alimentos, madera, muebles, decoración, joyería, minería, construcción, comercio, servicio y otros. Sus requerimientos de infraestructura física y tecnológica, así como sus mecanismos de operación son básicos. Involucra procesos y procedimientos estandarizados, por lo cual son de fácil adopción e implantación.</p> </td>
 												 </tr>
                       	</table>
@@ -438,30 +390,30 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">3.6 ¿Cuenta con instalaciones para el desarrollo de su Proyecto?</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="36" value="Si" > Si
+												<input type="radio"  name="36" value="No" > No
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">3.7 En caso afirmativo, especifique con qué Instalaciones cuenta.</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="37" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">3.8 ¿Cuenta con algún equipo o maquinaria para el desarrollo de su Proyecto?</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="38" value="Si" > Si
+												<input type="radio"  name="38" value="No" > No
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">3.9 En caso afirmativo, especifique con qué equipo o maquinaria cuenta.</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="39" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
@@ -472,22 +424,22 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">4.1 ¿Qué necesidades del mercado satisface la Empresa? Describa clara y brevemente las necesidades que atiende el producto.</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="41" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">4.2 ¿Conoce el mercado potencial para su Proyecto? Marque con una “X” en una de las siguientes casillas.</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="42" value="Si" > Si
+												<input type="radio"  name="42" value="No" > No
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">4.3 En caso afirmativo, describa cuáles son las características de sus clientes potenciales</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="43" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
@@ -502,23 +454,23 @@ gtag('config', 'UA-100554272-8');
                          </tr>
 												 <tr>
 												 	<td>Internacional</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="44" value="Internacional"></td>
 												 </tr>
 												 <tr>
 												 	<td>Nacional</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="44" value="Nacional"></td>
 												 </tr>
 												 <tr>
 												 	<td>Regional</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="44" value="Regional"></td>
 												 </tr>
 												 <tr>
 												 	<td>Estatal</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="44" value="Estatal"></td>
 												 </tr>
 												 <tr>
 												 	<td>Municipal</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="44" value="Municipal"></td>
 												 </tr>
                       	</table>
                       </div>
@@ -528,15 +480,15 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">4.5 ¿Existen en el mercado productos similares y/o sustitutos al suyo?</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="45" value="Si" > Si
+												<input type="radio"  name="45" value="No" > No
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">4.6 En caso afirmativo, mencione dichos productos.</label>
 											<div class="col-md-12">
-												<textarea name="name" rows="8" cols="80" maxlength="1500"></textarea>
+												<textarea name="46" rows="8" cols="80" maxlength="1500"></textarea>
 											</div>
 										</div>
 
@@ -547,8 +499,8 @@ gtag('config', 'UA-100554272-8');
 										<div class="form-group">
 											<label for="apellidos" class="col-md-12 control-label">5.1 ¿Ha realizado algún trámite de Propiedad Intelectual para su proyecto?</label>
 											<div class="col-md-10">
-												<input type="radio"  name="Ipass" placeholder="" value="" > Si
-												<input type="radio"  name="Ipass" placeholder="" value="" > No
+												<input type="radio"  name="51" value="Si" > Si
+												<input type="radio"  name="51" value="No" > No
 											</div>
 										</div>
 
@@ -563,27 +515,27 @@ gtag('config', 'UA-100554272-8');
                          </tr>
 												 <tr>
 												 	<td>Registo de marca</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Registo de marca"></td>
 												 </tr>
 												 <tr>
 												 	<td>Modelo de utilidad</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Modelo de utilidad"></td>
 												 </tr>
 												 <tr>
 												 	<td>Diseño industrial</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Diseño industrial"></td>
 												 </tr>
 												 <tr>
 												 	<td>Secreto industrial</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Secreto industrial"></td>
 												 </tr>
 												 <tr>
 												 	<td>Derecho de autor</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Derecho de autor"></td>
 												 </tr>
 												 <tr>
 												 	<td>Patente</td>
-													<td><input type="radio" name="int" value=""></td>
+													<td><input type="radio" name="52" value="Patente"></td>
 												 </tr>
                       	</table>
                       </div>
@@ -595,7 +547,7 @@ gtag('config', 'UA-100554272-8');
 										</div>
 
 										<div class="form-group">
-											<label for="apellidos" class="col-md-12 control-label">6.1 De acuerdo a la siguiente tabla, indique el estrato en el que proyecta su Empresa. </label>
+											<label for="apellidos" class="col-md-12 control-label"> De acuerdo a la siguiente tabla, indique el estrato en el que proyecta su Empresa. </label>
 											<div class="col-md-12">
                       <div class="table-responsive">
                       	<table class="table table-bordered table-hover table-condensed" align="center">
@@ -631,7 +583,131 @@ gtag('config', 'UA-100554272-8');
 											</div>
 										</div>
 
-										
+										<div class="form-group">
+											<label for="apellidos" class="col-md-12 control-label">6.1 Marque una de las siguientes casillas.</label>
+											<div class="col-md-10">
+												<input type="radio"  name="61" value="Micro" > Micro
+												<input type="radio"  name="61" value="Pequeña" > Pequeña
+												<input type="radio"  name="61" value="Mediana" > Mediana
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="apellidos" class="col-md-12 control-label">6.2 Clasificación del proyecto de acuerdo al Sector. Indique el sector al que pertenece su proyecto. Marque una de las siguientes casillas.</label>
+											<div class="col-md-10">
+												<input type="radio"  name="62" value="Industrial" > Industrial
+												<input type="radio"  name="62" value="Comercio" > Comercio
+												<input type="radio"  name="62" value="Servicios" > Servicios
+											</div>
+										</div>
+
+										<div class="p-3 mb-2 bg-secondary text-white">
+											<div class="panel-title"><h1 align="center">Sección 7: Impacto del proyecto</h1></div>
+										</div>
+
+										<div class="form-group">
+											<label for="apellidos" class="col-md-10 control-label">7.1 Empleo. Indique cuántos empleos estima conservará y cuántos generará a partir de la realización del proyecto.</label>
+											<div class="col-md-12">
+												<p align="justify">
+													- Se refiere a las personas que laboran actualmente en la empresa-proyecto y que conservarán su empleo.
+													<br>
+                          - Empleos que se pretende crear al final de los dos años del periodo de incubación.
+												</p>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-md-10">
+												<div class="form-check">
+                           <label class="form-check-label" for="exampleCheck1">Hombres</label>
+                           <input type="text" class="form-control" name="71[]" placeholder="Cantidad" value="">
+                        </div>
+												<div class="form-check">
+                           <label class="form-check-label" for="exampleCheck1">Mujeres</label>
+                           <input type="text" class="form-control" name="71[]" placeholder="Cantidad" value="">
+                        </div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="apellidos" class="col-md-12 control-label">7.2 Impacto ecológico. Describa las principales consecuencias que la realización de su proyecto traería al medio ambiente. ¿Conoce la normatividad ambiental aplicable a su proyecto en el ámbito nacional e internacional?</label>
+											<div class="col-md-12">
+												<textarea name="72" rows="8" cols="80" maxlength="1500"></textarea>
+											</div>
+										</div>
+
+										<div class="p-3 mb-2 bg-secondary text-white">
+											<div class="panel-title"><h1 align="center">Sección 8: Documentación de Respaldo</h1></div>
+										</div>
+
+										<div class="form-group">
+											<label for="apellidos" class="col-md-12 control-label">8.1 ¿Con qué documentación de apoyo cuenta su Proyecto? Dicha documentación deberá ser entregada junto con esta cédula. Marque en las casillas según corresponda.</label>
+											<div class="col-md-12">
+                      <div class="table-responsive">
+                      	<table class="table table-bordered table-hover table-condensed" align="center">
+                         <tr>
+                         	<th>Documento</th>
+													<th></th>
+                         </tr>
+												 <tr>
+												 	<td>Cotizaciones</td>
+													<td><input type="checkbox" name="81[]" value="Cotizaciones"></td>
+												 </tr>
+												 <tr>
+												 	<td>Planos</td>
+													<td><input type="checkbox" name="81[]" value="Planos"></td>
+												 </tr>
+												 <tr>
+												 	<td>Programas de trabajo</td>
+													<td><input type="checkbox" name="81[]" value="Programas de trabajo"></td>
+												 </tr>
+												 <tr>
+												 	<td>Estudio de Factibilidad Técnico</td>
+													<td><input type="checkbox" name="81[]" value="Estudio de Factibilidad Técnico"></td>
+												 </tr>
+												 <tr>
+												 	<td>Estudio de Factibilidad Económico</td>
+													<td><input type="checkbox" name="81[]" value="Estudio de Factibilidad Económico"></td>
+												 </tr>
+												 <tr>
+												 <td>Estudio de Mercado</td>
+												 <td><input type="checkbox" name="81[]" value="Estudio de Mercado"></td>
+												</tr>
+												<tr>
+												<td>Plan de Negocios</td>
+												<td><input type="checkbox" name="81[]" value="Plan de Negocios"></td>
+											 </tr>
+											 <tr>
+											 <td>Plan de Mercadotecnia</td>
+											 <td><input type="checkbox" name="81[]" value="Plan de Mercadotecnia"></td>
+											</tr>
+											<tr>
+											<td>Proyecto en Extenso</td>
+											<td><input type="checkbox" name="81[]" value="Proyecto en Extenso"></td>
+										 </tr>
+										 <tr>
+										 <td>Ninguno</td>
+										 <td><input type="checkbox" name="81[]" value="Ninguno"></td>
+										</tr>
+										<tr>
+										<td>Otro</td>
+										<td><input type="text" name="81[]"></td>
+									 </tr>
+                      	</table>
+                      </div>
+											</div>
+										</div>
+
+										<div class="p-3 mb-2 bg-secondary text-white">
+											<div class="panel-title"><h1 align="center">Sección 9: Compromisos de Trabajo</h1></div>
+										</div>
+
+										<div class="form-group">
+											<label for="apellidos" class="col-md-12 control-label">9.1 Horario de trabajo. Indique cuántas horas dedicaría semanalmente a su proyecto-empresa.</label>
+											<div class="col-md-12">
+												<textarea name="91" rows="8" cols="80" maxlength="1500"></textarea>
+											</div>
+										</div>
 
 										<div class="row w-100 align-items-center">
 											<div class="col text-center">
